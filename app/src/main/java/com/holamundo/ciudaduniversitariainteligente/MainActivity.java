@@ -199,7 +199,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             ///PROVISORIO SOLO PARA MOSTRAR POR LOGCAT
             RequestQueue queue = Volley.newRequestQueue(this);
 
-            String url = "https://my-json-server.typicode.com/cristian16b/DPM2019/db";
+            String url = "https://my-json-server.typicode.com/cristian16b/DispMoviles2019";
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
                 @Override
