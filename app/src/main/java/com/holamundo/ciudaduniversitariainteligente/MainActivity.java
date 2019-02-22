@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Cambio el fragment por defecto por mi mapFragment
         fm.beginTransaction().replace(R.id.fragment_container, mapsFragment).addToBackStack(null).commit();
 
-        mapsFragment.setKey("AIzaSyBIR6kyfuK6F_rLl7UCpK7DroGMca3L8Dc");
+        mapsFragment.setKey("AIzaSyAY3_zaZiIwKVqIlbgTaTLCacnJaoklQ1U");
     }
 
     @Override
