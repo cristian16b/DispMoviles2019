@@ -16,12 +16,22 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.android.gms.maps.GoogleMap;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Vector;
 
@@ -182,6 +192,41 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //fm.popBackStack();
                 fm.beginTransaction().replace(R.id.fragment_container, ultimasBusquedas).addToBackStack(null).commit();
             }
+        }
+        else if (id == R.id.comedorUniversitario)
+        {
+            RequestQueue queue = Volley.newRequestQueue(this);
+
+            String url = "https://my-json-server.typicode.com/cristian16b/DPM2019/db";
+
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+
+                    try {
+                        JSONObject jso = new JSONObject(response);
+                        //Toast.makeText(this,jso.toString(), Toast.LENGTH_LONG).show();
+
+                        Log.i("menu: ",""+response);
+                    }
+                    catch (JSONException e) {
+                        e.printStackTrace();
+                        //Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
+
+                    }
+
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            });
+
+            queue.add(stringRequest);
+
+            // Add the request to the RequestQueue.
+            queue.add(stringRequest);
 
         }
 
