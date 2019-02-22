@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ultimasBusquedas ultimasBusquedas = null;
     private Menu menu = null;
     private BaseDatos CUdb = null;
+    private MenuFragment menuFragment = null;
 
 
     /*Funciones*/
@@ -80,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         mapsFragment = new MapsFragment();
         ultimasBusquedas = new ultimasBusquedas();
         ultimasBusquedas.setMainActivity(this);
+        menuFragment = new MenuFragment();
         //trayectoaCU.onMapReady(R.mipmap);
 
         //Agrego Nodos a mi vector de nodos en oArmaCamino
@@ -107,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         //Cambio el fragment por defecto por mi mapFragment
         fm.beginTransaction().replace(R.id.fragment_container, mapsFragment).addToBackStack(null).commit();
 
+        //seteo la key en mapsfragment
         mapsFragment.setKey("AIzaSyAY3_zaZiIwKVqIlbgTaTLCacnJaoklQ1U");
     }
 
@@ -195,10 +198,18 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if (id == R.id.comedorUniversitario)
         {
+            if (!(fm.findFragmentById(R.id.fragment_container) instanceof ultimasBusquedas)) {
+                qrBoton.hide();
+                menu.clear();
+                //fm.popBackStack();
+                fm.beginTransaction().replace(R.id.fragment_container,menuFragment).addToBackStack(null).commit();
+            }
 
+            /*
             ///PROVISORIO SOLO PARA MOSTRAR POR LOGCAT
             RequestQueue queue = Volley.newRequestQueue(this);
 
+            //webservice publico fake , ingresar a la url para ver la estructura json de los datos
             String url = "https://my-json-server.typicode.com/cristian16b/DispMoviles2019";
 
             StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
@@ -229,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             // Add the request to the RequestQueue.
             queue.add(stringRequest);
-
+            */
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

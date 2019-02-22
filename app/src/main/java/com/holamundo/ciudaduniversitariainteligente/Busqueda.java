@@ -69,7 +69,8 @@ public class Busqueda extends Fragment {
         ArrayAdapter<String> arraySB1 = new ArrayAdapter<String>(getActivity(), R.layout.spinner_layout, itemsSB1);
         spinnerBusqueda.setAdapter(arraySB1);
 
-        //OnItemSelectedListener para el spinnerBusqueda, depende que selecciono, habilito o deshabilito los otros spinners
+        //OnItemSelectedListener para el spinnerBusqueda, depende que
+        // selecciono, habilito o deshabilito los otros spinners
         spinnerBusqueda.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
