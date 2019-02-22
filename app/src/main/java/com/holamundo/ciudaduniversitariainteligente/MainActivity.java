@@ -195,6 +195,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         else if (id == R.id.comedorUniversitario)
         {
+
+            ///PROVISORIO SOLO PARA MOSTRAR POR LOGCAT
             RequestQueue queue = Volley.newRequestQueue(this);
 
             String url = "https://my-json-server.typicode.com/cristian16b/DPM2019/db";
