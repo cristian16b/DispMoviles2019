@@ -4,9 +4,22 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 /**
@@ -63,6 +76,46 @@ public class MenuFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        ///PROVISORIO SOLO PARA MOSTRAR POR LOGCAT
+        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+
+        //webservice publico fake , ingresar a la url para ver la estructura json de los datos
+        String url = "https://my-json-server.typicode.com/cristian16b/DispMoviles2019/db";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try
+                {
+                    JSONObject jso = new JSONObject(response);
+
+                    // jregular = jso.getJSONArray("regular");
+
+                    //seteo los inputs
+                    //por defecto muestro menu para celiacos
+                    String  entrada,plato,postre;
+
+                    Log.i("menu: ",""+jso);
+
+                }
+                catch (JSONException e) {
+                    e.printStackTrace();
+                    //Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        queue.add(stringRequest);
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_menu, container, false);
     }
@@ -90,6 +143,7 @@ public class MenuFragment extends Fragment {
         }
     }
     */
+
 
     @Override
     public void onDetach() {

@@ -204,43 +204,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 //fm.popBackStack();
                 fm.beginTransaction().replace(R.id.fragment_container,menuFragment).addToBackStack(null).commit();
             }
-
-            /*
-            ///PROVISORIO SOLO PARA MOSTRAR POR LOGCAT
-            RequestQueue queue = Volley.newRequestQueue(this);
-
-            //webservice publico fake , ingresar a la url para ver la estructura json de los datos
-            String url = "https://my-json-server.typicode.com/cristian16b/DispMoviles2019";
-
-            StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-
-                    try {
-                        JSONObject jso = new JSONObject(response);
-                        //Toast.makeText(this,jso.toString(), Toast.LENGTH_LONG).show();
-
-                        Log.i("menu: ",""+response);
-                    }
-                    catch (JSONException e) {
-                        e.printStackTrace();
-                        //Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
-
-                    }
-
-                }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            });
-
-            queue.add(stringRequest);
-
-            // Add the request to the RequestQueue.
-            queue.add(stringRequest);
-            */
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
