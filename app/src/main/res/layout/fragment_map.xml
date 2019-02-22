@@ -1,7 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/botonCaminando"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:onClick="mostrarCaminoCaminando"
+            android:scaleType="fitCenter"
+            android:src = "@drawable/peaton" />
+
+        <ImageButton
+            android:id="@+id/botonManejando"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:onClick="mostrarCaminoManejando"
+            android:scaleType="fitCenter"
+            android:src="@drawable/coche" />
+
+        <ImageButton
+            android:id="@+id/botonColectivo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:onClick="mostrarWebCuandoPasa"
+            android:scaleType="fitCenter"
+            android:src="@drawable/autobus" />
+    </LinearLayout>
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/map"
