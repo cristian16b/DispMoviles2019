@@ -541,7 +541,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
     }
 
     //funcion para armar la ruta
-    private String armaUrl(boolean bandera)
+    private String armaUrl(boolean bandera,double lat,double lon)
     {
         //LA URL PARA CONSULTAR AL WEBSERVICE SE USAR COMO SE VE:
         //ORIGIN
@@ -564,13 +564,18 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
             modo = "&mode=driving";
         }
 
+        //convierto variables de double a string
+        Double dlatitud = lat;
+        Double dlongitud = lon;
+        String latitud = dlatitud.toString();
+        String longitud = dlongitud.toString();
+
         //String url = "http://cuandopasa.smartmovepro.net/Paginas/Paginas/Recorridos.aspx/RecuperarRecorrido";
 
         //armo la url
-        //String url ="https://maps.googleapis.com/maps/api/directions/json?origin="+this.lat+","+this.lon+"&destination=-31.640771, -60.671849"+ key + modo;
-        return "https://maps.googleapis.com/maps/api/directions/json?origin=-31.6177085,-60.6841818&destination=-31.640771, -60.671849"+ key + modo;
+        return  "https://maps.googleapis.com/maps/api/directions/json?origin="+latitud+","+longitud+"&destination=-31.640771, -60.671849"+ key + modo;
+        //return "https://maps.googleapis.com/maps/api/directions/json?origin=-31.6177085,-60.6841818&destination=-31.640771, -60.671849"+ key + modo;
     }
-
 
     private void mostrarDistanciaTiempo(JSONObject jso)
     {
@@ -639,13 +644,18 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
 
     public void mostrarCaminoCaminando()
     {
-        String url = armaUrl(true);
+        String url = armaUrl(true,this.lat,this.lon);
 
         Log.i("url: ",""+url);
 
-        //Location currentLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+        Double longi = this.lon;
+        Double lati = this.lat;
+        String coord = longi.toString() + "," + lati.toString();
+        Toast.makeText(getActivity().getApplicationContext(),coord, Toast.LENGTH_LONG).show();
+
 
         Toast.makeText(getActivity().getApplicationContext(),url, Toast.LENGTH_LONG).show();
+
 
         RequestQueue queue = Volley.newRequestQueue(getActivity());
 
@@ -688,7 +698,7 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Sensor
 
     public void mostrarCaminoManejando()
     {
-        String url = armaUrl(false);
+        String url = armaUrl(false,this.lat,this.lon);
 
         Log.i("url: ",""+url);
 

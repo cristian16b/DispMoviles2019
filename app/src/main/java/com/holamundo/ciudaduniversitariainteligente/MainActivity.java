@@ -2,6 +2,7 @@ package com.holamundo.ciudaduniversitariainteligente;
 
 
 import android.Manifest;
+import android.net.Uri;
 import android.os.Build;
 import android.support.v4.app.FragmentManager;
 import android.content.Intent;
@@ -95,6 +96,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //Cambio el fragment por defecto por mi mapFragment
         fm.beginTransaction().replace(R.id.fragment_container, mapsFragment).addToBackStack(null).commit();
+
+        mapsFragment.setKey("AIzaSyBIR6kyfuK6F_rLl7UCpK7DroGMca3L8Dc");
     }
 
     @Override
@@ -293,4 +296,31 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             toast.show();
         }
     }
+
+    //evento para trazar la ruta si se va caminando
+    public void mostrarCaminoCaminando(android.view.View view)
+    {
+  //      Toast.makeText(this,"CLICK IR CAMINANDO", Toast.LENGTH_LONG).show();
+
+        this.mapsFragment.mostrarCaminoCaminando();
+    }
+
+    //evento para trazar la ruta si se va manejando
+    public void mostrarCaminoManejando(android.view.View view)
+    {
+//        Toast.makeText(this,"CLICK IR MANEJANDO", Toast.LENGTH_LONG).show();
+
+        this.mapsFragment.mostrarCaminoManejando();
+    }
+
+    //abro el cuando pasa en el navegador del celular
+    //ver si se puede abrir en un activity
+    public void mostrarWebCuandoPasa(android.view.View view)
+    {
+        //REF:https://androidstudiofaqs.com/tutoriales/abrir-url-desde-boton-android-studio
+        Uri uri = Uri.parse("http://cuandopasa.smartmovepro.net/Paginas/Paginas/Recorridos.aspx");
+        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+        startActivity(intent);
+    }
+
 }
