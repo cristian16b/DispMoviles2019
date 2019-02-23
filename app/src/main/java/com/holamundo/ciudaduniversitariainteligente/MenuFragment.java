@@ -38,14 +38,25 @@ public class MenuFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
+
+    //textview para mostrar las partes del menu
+    private TextView t_entrada;
+    private TextView t_principal;
+    private TextView t_postre;
+
+    //variables para guardar las partes del menu
+    private String entrada_n;
+    private String principal_n;
+    private String postre_n;
+    private String entrada_c;
+    private String principal_c;
+    private String postre_c;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
-
-    private JSONArray menu;
-    private JSONArray celiaco;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -60,12 +71,17 @@ public class MenuFragment extends Fragment {
      * @return A new instance of fragment MenuFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MenuFragment newInstance(String param1, String param2) {
+    public MenuFragment newInstance(String param1, String param2) {
         MenuFragment fragment = new MenuFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
+
+        //seteo las variables
+        this.entrada_c = this.principal_c = this.postre_c = this.entrada_c = this.principal_c
+                = this.postre_c = "(Sin información)";
+
         return fragment;
     }
 
@@ -85,12 +101,10 @@ public class MenuFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_menu, container, false);
 
-        final TextView t_entrada = (TextView) view.findViewById(R.id.entrada); //instancie al texview del xml
-        final TextView t_principal = (TextView) view.findViewById(R.id.principal); //instancie al texview del xml
-        final TextView t_postre = (TextView) view.findViewById(R.id.postre); //instancie al texview del xml
+        this.t_entrada = (TextView) view.findViewById(R.id.entrada); //instancie al texview del xml
+        this.t_principal = (TextView) view.findViewById(R.id.principal); //instancie al texview del xml
+        this.t_postre = (TextView) view.findViewById(R.id.postre); //instancie al texview del xml
 
-
-        ///PROVISORIO SOLO PARA MOSTRAR POR LOGCAT
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
         //webservice publico fake , ingresar a la url para ver la estructura json de los datos
@@ -107,29 +121,25 @@ public class MenuFragment extends Fragment {
                     //accedo a menu regular
                     JSONArray jregular = jso.getJSONArray("regular");
                     //accedo al primer elemento
-                    JSONObject s = jregular.getJSONObject(0);
-                    String  entrada_n,plato_n,postre_n;
+                    JSONObject item = jregular.getJSONObject(0);
 
-                    entrada_n = s.getString("entrada");
-                    plato_n = s.getString("plato");
-                    postre_n = s.getString("postre");
+                    entrada_n = item.getString("entrada");
+                    principal_n = item.getString("plato");
+                    postre_n = item.getString("postre");
 
+                    //por defecto se muestra el menu regular
                     t_entrada.setText(entrada_n);
-                    t_principal.setText(plato_n);
+                    t_principal.setText(principal_n);
                     t_postre.setText(postre_n);
 
-
-
+                    //obtengo el menu para celiacos y lo guardo
                     JSONArray jceliaco = jso.getJSONArray("celiaco");
-                    //accedo al primer elemento
-                    JSONObject jc = jregular.getJSONObject(0);
-                    String  entrada_c,plato_c,postre_c;
+                    //accedo al primer item
+                    item = jregular.getJSONObject(0);
 
-                    entrada_c = s.getString("entrada");
-                    plato_c = s.getString("plato");
-                    postre_c = s.getString("postre");
-
-
+                    entrada_c = item.getString("entrada");
+                    principal_c = item.getString("plato");
+                    postre_c = item.getString("postre");
 
                     // Toast.makeText(getActivity().getApplicationContext(), entrada_s, Toast.LENGTH_LONG).show();
                 }
@@ -203,11 +213,7 @@ public class MenuFragment extends Fragment {
 
     public void mostrarMenues()
     {
-
-
-
-
-
+        //provisorio solo muestra el de celiacos
 
     }
 }
