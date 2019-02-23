@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,6 +44,7 @@ public class MenuFragment extends Fragment {
     private TextView t_entrada;
     private TextView t_principal;
     private TextView t_postre;
+    private Button botonActualizar;
 
     //variables para guardar las partes del menu
     private String entrada_n;
@@ -104,6 +106,7 @@ public class MenuFragment extends Fragment {
         this.t_entrada = (TextView) view.findViewById(R.id.entrada); //instancie al texview del xml
         this.t_principal = (TextView) view.findViewById(R.id.principal); //instancie al texview del xml
         this.t_postre = (TextView) view.findViewById(R.id.postre); //instancie al texview del xml
+        this.botonActualizar = (Button) view.findViewById(R.id.botonVerMenu);
 
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
@@ -140,12 +143,10 @@ public class MenuFragment extends Fragment {
                     entrada_c = item.getString("entrada");
                     principal_c = item.getString("plato");
                     postre_c = item.getString("postre");
-
-                    Toast.makeText(getActivity().getApplicationContext(), item.toString(), Toast.LENGTH_LONG).show();
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
-                    //Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÃ“N", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -211,13 +212,32 @@ public class MenuFragment extends Fragment {
         void onFragmentInteraction(Uri uri);
     }
 
-    public void mostrarMenues()
+
+    public void mostrarMenues(String botonTexto)
     {
-        //Toast.makeText(getActivity().getApplicationContext(), this.entrada_c, Toast.LENGTH_LONG).show();
-        Toast.makeText(getActivity().getApplicationContext(), principal_c, Toast.LENGTH_LONG).show();
-        //provisorio solo muestra el de celiacos
-        t_entrada.setText(entrada_c);
-        t_principal.setText(principal_c);
-        t_postre.setText(postre_c);
+        if(botonTexto.equals("Menú Celiaco"))
+        {
+            //Muestro el menu para celiacos
+            t_entrada.setText(entrada_c);
+            t_principal.setText(principal_c);
+            t_postre.setText(postre_c);
+
+            //seteo texto del boton
+            botonActualizar.setText("VOLVER");
+        }
+        else if(botonTexto.equals("VOLVER"))
+        {
+            //Muestro el menu para celiacos
+            t_entrada.setText(entrada_n);
+            t_principal.setText(principal_n);
+            t_postre.setText(postre_n);
+
+            //seteo texto del boton
+            botonActualizar.setText("MENÚ CELIACO");
+        }
+        else
+        {
+            Toast.makeText(getActivity().getApplicationContext(), "ERROR", Toast.LENGTH_LONG).show();
+        }
     }
 }

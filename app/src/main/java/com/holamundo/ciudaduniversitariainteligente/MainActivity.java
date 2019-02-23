@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -330,8 +331,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //evento para trazar la ruta si se va manejando
     public void mostrarCaminoManejando(android.view.View view)
     {
-//        Toast.makeText(this,"CLICK IR MANEJANDO", Toast.LENGTH_LONG).show();
-
         this.mapsFragment.mostrarCaminoManejando();
     }
 
@@ -348,9 +347,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //evento para actualizar los menus
     public void mostrarMenuComedor(android.view.View view)
     {
-        this.menuFragment.mostrarMenues();
+
+        Button boton = (Button)view;
+        String botonTexto = boton.getText().toString();
+        //Toast.makeText(this,botonTexto, Toast.LENGTH_LONG).show();
+
+        this.menuFragment.mostrarMenues(botonTexto);
     }
-
-
-
 }

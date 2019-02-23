@@ -101,7 +101,7 @@
         <!--botones -->
 
         <Button
-            android:id="@+id/botonVerMenuCeliacos"
+            android:id="@+id/botonVerMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

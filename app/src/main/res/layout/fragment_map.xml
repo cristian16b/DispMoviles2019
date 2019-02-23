@@ -19,7 +19,7 @@
             android:adjustViewBounds="true"
             android:onClick="mostrarCaminoCaminando"
             android:scaleType="fitCenter"
-            android:src = "@drawable/peaton" />
+            android:src="@drawable/peaton" />
 
         <ImageButton
             android:id="@+id/botonManejando"
