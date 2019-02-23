@@ -37,7 +37,7 @@ public class Busqueda extends Fragment {
     private Spinner spinnerBusqueda3 = null;
 
     /*
-    spinnerBusqueda es el spinner principal donde están las posibles busqueda: Edificios, aulas, baños, etc 
+    spinnerBusqueda es el spinner principal donde están las posibles busqueda: Edificios, aulas, baños, etc
     spinnerBusqueda2 tendrá una lista de los edificios (si seleccione Edificios o aulas)
     spinnerBusqueda3 tendrá una lista de las aulas para el edificio del spinnerBusqueda2 (si seleccione aulas en spinner2)
 
@@ -126,7 +126,7 @@ public class Busqueda extends Fragment {
                         break;
                     case "Predio":
                         Edificio = "Predio"; //SI USO * ENTONCES SOLO ME MARCA LA LOCACION, SIN TRAZAR EL CAMINO
-                        String[] itemsSB2b = {"Entrada Este", "Portico", "Pergolas", "Piletas", "Gimnasio", "Cancha Cubierta", "Canchas F5", "Cancha F11", "Cancha F7 Oeste", "Cancha F7 Este", "Cancha Basket/Voley", "Cancha Beach Voley", "Comedor", "Vestuarios"};
+                        String[] itemsSB2b = {"Entrada Este", "Portico", "Pergolas", "Piletas", "Gimnasio", "Cancha Cubierta", "Canchas F5", "Cancha F11", "Cancha F7 Oeste", "Cancha F7 Este", "Cancha Basket/Voley", "Cancha Beach Voley", "Comedor", "Vestuarios", "Hotel (entrada predio)", "Hotel (entrada calle)"};
                         ArrayAdapter<String> arraySB2b = new ArrayAdapter<String>(getActivity(), R.layout.spinner_layout, itemsSB2b);
                         spinnerBusqueda2.setAdapter(arraySB2b);
 
@@ -178,7 +178,7 @@ public class Busqueda extends Fragment {
                     }
 
                 } else if (spinnerBusqueda.getSelectedItem().toString().equals("Predio")) {
-                            Nombre = spinnerBusqueda2.getSelectedItem().toString();
+                    Nombre = spinnerBusqueda2.getSelectedItem().toString();
                 } else {
                     switch (spinnerBusqueda2.getSelectedItem().toString()) {
                         case "Todos":

@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //seteo la key en mapsfragment
         mapsFragment.setKey("AIzaSyAY3_zaZiIwKVqIlbgTaTLCacnJaoklQ1U");
+
     }
 
     @Override
@@ -321,7 +322,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     //evento para trazar la ruta si se va caminando
     public void mostrarCaminoCaminando(android.view.View view)
     {
-  //      Toast.makeText(this,"CLICK IR CAMINANDO", Toast.LENGTH_LONG).show();
+        //      Toast.makeText(this,"CLICK IR CAMINANDO", Toast.LENGTH_LONG).show();
 
         this.mapsFragment.mostrarCaminoCaminando();
     }
@@ -343,5 +344,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         Intent intent = new Intent(Intent.ACTION_VIEW, uri);
         startActivity(intent);
     }
+
+    //evento para actualizar los menus
+    public void mostrarMenus(android.view.View view)
+    {
+//        Toast.makeText(this,"CLICK IR MANEJANDO", Toast.LENGTH_LONG).show();
+
+        this.menuFragment.mostrarMenues();
+    }
+
+
 
 }

@@ -286,22 +286,21 @@ public class BaseDatos extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(String.format(INSERT_PUNTO_TEMPLATE, 230, "-31.638196", "-60.674859", "Predio", 0, "", -1));//test16
         sqLiteDatabase.execSQL(String.format(INSERT_PUNTO_TEMPLATE, 231, "-31.637888", "-60.675329", "Predio", 0, "", -1));//test17
 
-        sqLiteDatabase.execSQL(String.format(INSERT_PUNTO_TEMPLATE, 232, "-31.639745", "-60.673202", "Predio", 0, "", -1));//test19 (fuera predio)
-        sqLiteDatabase.execSQL(String.format(INSERT_PUNTO_TEMPLATE, 233, "-31.640161", "-60.673218", "Predio", 0, "", -1));//test20 (fuera predio)
-        sqLiteDatabase.execSQL(String.format(INSERT_PUNTO_TEMPLATE, 234, "-31.640113", "-60.671926", "Predio", 0, "", -1));//test21 (fuera predio)
+        sqLiteDatabase.execSQL(String.format(INSERT_PUNTO_TEMPLATE, 232, "-31.639745", "-60.673202", "Predio", 0, "", -1));//test18 (fuera predio)
+        sqLiteDatabase.execSQL(String.format(INSERT_PUNTO_TEMPLATE, 233, "-31.640161", "-60.673218", "Predio", 0, "", -1));//test19 (fuera predio)
+        sqLiteDatabase.execSQL(String.format(INSERT_PUNTO_TEMPLATE, 234, "-31.640113", "-60.671926", "Predio", 0, "", -1));//test20 (fuera predio)
+
+        //hotel
+        sqLiteDatabase.execSQL(String.format(INSERT_PUNTO_TEMPLATE, 235, "-31.640293", "-60.676516", "Predio", 0, "Hotel (entrada predio)", -1));
+        sqLiteDatabase.execSQL(String.format(INSERT_PUNTO_TEMPLATE, 236, "-31.640576", "-60.676608", "Predio", 0, "Hotel (entrada calle)", -1));
+
+        //nodos mudos exteriores para hotel
+        sqLiteDatabase.execSQL(String.format(INSERT_PUNTO_TEMPLATE, 237, "-31.640920", "-60.676696", "Predio", 0, "", -1));//test21 (hotel)
+        sqLiteDatabase.execSQL(String.format(INSERT_PUNTO_TEMPLATE, 238, "-31.641000", "-60.674858", "Predio", 0, "", -1));//test22 (hotel)
+        sqLiteDatabase.execSQL(String.format(INSERT_PUNTO_TEMPLATE, 239, "-31.640965", "-60.673280", "Predio", 0, "", -1));//test23 (hotel)
 
         //CONEXIONES DE NODOS
         //
-        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 0, 234)); //entrada facu - entrada este predio
-
-        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 234, 0));
-        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 234, 233));
-
-        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 233, 234));
-        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 233, 232));
-
-        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 232, 233));
-        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 232, 201));
 
         //sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 0, 201));
 
@@ -317,6 +316,7 @@ public class BaseDatos extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 217, 218));
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 217, 219));
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 217, 221));
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 217, 235));
 
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 218, 217));//test4
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 218, 202));
@@ -325,6 +325,7 @@ public class BaseDatos extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 219, 217));//test5
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 219, 209));
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 219, 235));
 
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 220, 201));//test6
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 220, 212));
@@ -389,6 +390,31 @@ public class BaseDatos extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 231, 224));
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 231, 208));
 
+        //fuera del predio
+        //conexiones predio-unl
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 232, 233));//test18
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 232, 201));
+
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 233, 234));//test19
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 233, 232));
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 233, 239));
+
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 234, 0));//test20
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 234, 1));//(entrada fich)
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 234, 233));
+
+        //hotel, salida exterior
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 237, 236));//test21
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 237, 238));
+
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 238, 237));//test22
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 238, 239));
+
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 239, 238));//test22
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 239, 233));
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 239, 0));
+
+        //locaciones
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 207, 222));//canchas f5
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 207, 223));
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 207, 224));
@@ -438,14 +464,20 @@ public class BaseDatos extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 208, 231));//cancha f11
 
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 235, 217));//hotel (entrada predio)
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 235, 219));
 
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 236, 237)); //hotel (salida calle)
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 0, 234)); //entrada facu - entrada este predio
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 0, 239));
         //
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 0, 200));
 
-        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 1, 2));
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 1, 2));//entrada fich
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 1, 15));
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 1, 17));
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 1, 200));
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 1, 234));//nodo pal predio
 
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 2, 1));
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 2, 3));
@@ -717,9 +749,11 @@ public class BaseDatos extends SQLiteOpenHelper {
 
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 86, 85));
 
-        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 87, 50));
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 87, 50));//entrada fcbc
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 87, 88));
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 87, 90));
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 87, 232));//nodo pal predio
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 87, 233));//nodo pal predio
 
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 88, 87));
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 88, 89));
@@ -746,11 +780,13 @@ public class BaseDatos extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 94, 93));
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 94, 95));
 
-        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 95, 94));
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 95, 94)); //nodo que conecta FCM
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 95, 96));
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 95, 97));
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 95, 234));//nodo pal predio
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 95, 232));//nodo pal hotel (entrada calle)
 
-        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 96, 95));
+        sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 96, 95)); //entrada FCM
 
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 97, 95));
         sqLiteDatabase.execSQL(String.format(INSERT_CONEXION_TEMPLATE, 97, 15));

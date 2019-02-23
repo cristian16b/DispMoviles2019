@@ -16,16 +16,12 @@ public class HashMaps {
     public HashMaps(){
         //Edificio 0 - FICH/FCBC
         hashMapBounds.put("ed0_0", new LatLngBounds(new LatLng(-31.640064, -60.673090), new LatLng(-31.639671, -60.671973)));
-        //hashMapBounds.put("ed0_0", new LatLngBounds(new LatLng(-31.640131, -60.674323), new LatLng(-31.639922, -60.674045)));
-
         hashMapBounds.put("ed0_1", new LatLngBounds(new LatLng(-31.640064, -60.673090), new LatLng(-31.639671, -60.671973)));
         hashMapBounds.put("ed0_2", new LatLngBounds(new LatLng(-31.640064, -60.673090), new LatLng(-31.639671, -60.671973)));
         hashMapBounds.put("ed0_3", new LatLngBounds(new LatLng(-31.640064, -60.673090), new LatLng(-31.639671, -60.671973)));
         hashMapBounds.put("ed4_0", new LatLngBounds(new LatLng(-31.639896, -60.671735), new LatLng(-31.639576, -60.670991)));
         hashMapBounds.put("ed4_1", new LatLngBounds(new LatLng(-31.639896, -60.671735), new LatLng(-31.639576, -60.670991)));
-
-        //-31.640064 > -31.640776
-
+        //
         hashMapBounds.put("ed5_0", new LatLngBounds(new LatLng(-31.640346, -60.673949), new LatLng(-31.639980, -60.673311)));
         hashMapBounds.put("ed5_1", new LatLngBounds(new LatLng(-31.640346, -60.673949), new LatLng(-31.639980, -60.673311)));
         hashMapBounds.put("ed5_2", new LatLngBounds(new LatLng(-31.640346, -60.673949), new LatLng(-31.639980, -60.673311)));

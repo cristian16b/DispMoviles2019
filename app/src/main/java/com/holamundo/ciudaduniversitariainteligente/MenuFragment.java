@@ -4,10 +4,12 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.style.TtsSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -41,6 +43,9 @@ public class MenuFragment extends Fragment {
     private String mParam2;
 
     private OnFragmentInteractionListener mListener;
+
+    private JSONArray menu;
+    private JSONArray celiaco;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -77,6 +82,14 @@ public class MenuFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+
+        View view = inflater.inflate(R.layout.fragment_menu, container, false);
+
+        final TextView t_entrada = (TextView) view.findViewById(R.id.entrada); //instancie al texview del xml
+        final TextView t_principal = (TextView) view.findViewById(R.id.principal); //instancie al texview del xml
+        final TextView t_postre = (TextView) view.findViewById(R.id.postre); //instancie al texview del xml
+
+
         ///PROVISORIO SOLO PARA MOSTRAR POR LOGCAT
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
@@ -91,18 +104,38 @@ public class MenuFragment extends Fragment {
                 {
                     JSONObject jso = new JSONObject(response);
 
-                    // jregular = jso.getJSONArray("regular");
+                    //accedo a menu regular
+                    JSONArray jregular = jso.getJSONArray("regular");
+                    //accedo al primer elemento
+                    JSONObject s = jregular.getJSONObject(0);
+                    String  entrada_n,plato_n,postre_n;
 
-                    //seteo los inputs
-                    //por defecto muestro menu para celiacos
-                    String  entrada,plato,postre;
+                    entrada_n = s.getString("entrada");
+                    plato_n = s.getString("plato");
+                    postre_n = s.getString("postre");
 
-                    Log.i("menu: ",""+jso);
+                    t_entrada.setText(entrada_n);
+                    t_principal.setText(plato_n);
+                    t_postre.setText(postre_n);
 
+
+
+                    JSONArray jceliaco = jso.getJSONArray("celiaco");
+                    //accedo al primer elemento
+                    JSONObject jc = jregular.getJSONObject(0);
+                    String  entrada_c,plato_c,postre_c;
+
+                    entrada_c = s.getString("entrada");
+                    plato_c = s.getString("plato");
+                    postre_c = s.getString("postre");
+
+
+
+                    // Toast.makeText(getActivity().getApplicationContext(), entrada_s, Toast.LENGTH_LONG).show();
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
-                    //Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÃ“N", Toast.LENGTH_LONG).show();
                 }
             }
         }, new Response.ErrorListener() {
@@ -117,7 +150,9 @@ public class MenuFragment extends Fragment {
         queue.add(stringRequest);
 
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_menu, container, false);
+        //return inflater.inflate(R.layout.fragment_menu, container, false);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -164,5 +199,15 @@ public class MenuFragment extends Fragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    public void mostrarMenues()
+    {
+
+
+
+
+
+
     }
 }
