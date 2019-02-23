@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="0.5"
-            android:onClick="mostratMenus"
+            android:onClick="mostrarMenuComedor"
             android:text="Menú Celiaco" />
     </LinearLayout>
 </FrameLayout>

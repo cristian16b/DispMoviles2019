@@ -135,13 +135,13 @@ public class MenuFragment extends Fragment {
                     //obtengo el menu para celiacos y lo guardo
                     JSONArray jceliaco = jso.getJSONArray("celiaco");
                     //accedo al primer item
-                    item = jregular.getJSONObject(0);
+                    item = jceliaco.getJSONObject(0);
 
                     entrada_c = item.getString("entrada");
                     principal_c = item.getString("plato");
                     postre_c = item.getString("postre");
 
-                    // Toast.makeText(getActivity().getApplicationContext(), entrada_s, Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity().getApplicationContext(), item.toString(), Toast.LENGTH_LONG).show();
                 }
                 catch (JSONException e) {
                     e.printStackTrace();
@@ -213,7 +213,11 @@ public class MenuFragment extends Fragment {
 
     public void mostrarMenues()
     {
+        //Toast.makeText(getActivity().getApplicationContext(), this.entrada_c, Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity().getApplicationContext(), principal_c, Toast.LENGTH_LONG).show();
         //provisorio solo muestra el de celiacos
-
+        t_entrada.setText(entrada_c);
+        t_principal.setText(principal_c);
+        t_postre.setText(postre_c);
     }
 }

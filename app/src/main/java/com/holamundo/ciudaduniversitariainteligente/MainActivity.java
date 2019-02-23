@@ -346,10 +346,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     //evento para actualizar los menus
-    public void mostrarMenus(android.view.View view)
+    public void mostrarMenuComedor(android.view.View view)
     {
-//        Toast.makeText(this,"CLICK IR MANEJANDO", Toast.LENGTH_LONG).show();
-
         this.menuFragment.mostrarMenues();
     }
 
