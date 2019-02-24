@@ -5,10 +5,43 @@
     android:layout_height="match_parent"
     tools:context=".BedeliaMovil">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:layout_weight="0.15"
+        android:weightSum="1"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:textSize="20dp"
+            android:layout_weight="0.1"
+            android:textColor="@color/negro"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:text="Facultad "
+            android:id="@+id/tv1" />
+
+        <Spinner
+            android:scrollbarSize="30dp"
+            android:layout_weight="0.3"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/facultadSpinner" />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_weight="0.15"
+        android:weightSum="1"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_marginTop="15dp"
+        android:layout_height="wrap_content">
+
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1" />
+    </LinearLayout>
 </FrameLayout>

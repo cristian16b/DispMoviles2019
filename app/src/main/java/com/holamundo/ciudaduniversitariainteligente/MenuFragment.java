@@ -152,7 +152,6 @@ public class MenuFragment extends Fragment {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
             }
         });
         queue.add(stringRequest);

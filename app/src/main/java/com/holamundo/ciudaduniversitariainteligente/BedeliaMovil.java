@@ -7,6 +7,21 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 
 /**
@@ -26,11 +41,14 @@ public class BedeliaMovil extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private JSONObject listaHorariosFacultades;
+    private Spinner spinnerFacultad = null;
 
-    private OnFragmentInteractionListener mListener;
 
     public BedeliaMovil() {
         // Required empty public constructor
+        //this.spinnerFacultad = (Spinner) spinnerFacultad.findViewById(0);
+        this.listaHorariosFacultades = new JSONObject();
     }
 
     /**
@@ -63,16 +81,82 @@ public class BedeliaMovil extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_bedelia_movil, container, false);
+
+        spinnerFacultad = (Spinner) view.findViewById(R.id.facultadSpinner);
+
+        //cargo los valores de spinner
+        final String[] facultades = {" --- ", "FICH", "FCBC", "FADU", "FHUC"};
+        ArrayAdapter <String>adapter = new ArrayAdapter<String>(getActivity(),R.layout.spinner_layout,facultades);
+        spinnerFacultad.setAdapter(adapter);
+
+        spinnerFacultad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() // register the listener
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+            {
+                // User selected item
+                //Toast.makeText(getActivity().getApplicationContext(), facultades[position] + " selected!", Toast.LENGTH_SHORT).show();
+                
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        //llamo al webservice
+        RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
+
+        //webservice publico fake , ingresar a la url para ver la estructura json de los datos
+        String url = "https://my-json-server.typicode.com/cristian16b/DispMoviles2019/db";
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+
+                try
+                {
+                    JSONObject jso = new JSONObject(response);
+
+                    //accedo al subarray bedelia
+                    JSONArray jregular = jso.getJSONArray("bedelia");
+                    //accedo al primer elemento (listado de facultades)
+                    listaHorariosFacultades = jregular.getJSONObject(0);
+                }
+                catch (JSONException e)
+                {
+                    e.printStackTrace();
+                    Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+
+            }
+        });
+        queue.add(stringRequest);
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_bedelia_movil, container, false);
+        return view;
     }
 
+
+
     // TODO: Rename method, update argument and hook method into UI event
+    /*
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
+    */
 
     /*
     @Override
@@ -87,11 +171,13 @@ public class BedeliaMovil extends Fragment {
     }
     */
 
+    /*
     @Override
     public void onDetach() {
         super.onDetach();
         mListener = null;
     }
+    */
 
     /**
      * This interface must be implemented by activities that contain this
