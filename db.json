@@ -14,5 +14,46 @@
       "plato": "pastas sin tacc",
 	  "postre": "fruta"
     }
+  ],
+  "bedelia":[
+	{
+	 "fich" :[
+		{
+		 "id": 1,
+		 "aula" : 9,
+		 "inicio": "10.30",
+		 "fin": "11.30",
+		 "materia" :"tecprog",
+		 "docentes": "garello, delia, etc"
+		}
+		,
+		{
+		 "id": 2,
+		 "aula" : 7,
+		 "inicio": "10.30",
+		 "fin": "11.30",
+		 "materia" :"domotica",
+		 "docentes": "garello, delia, etc"
+		}
+		,
+		{
+		 "id": 3,
+		 "aula" : 1,
+		 "inicio": "12.30",
+		 "fin": "15.30",
+		 "materia" :"computacion grafica",
+		 "docentes": "novaresio"
+		}
+		,
+		{
+		 "id": 4,
+		 "aula" : 9,
+		 "inicio": "20.30",
+		 "fin": "22.30",
+		 "materia" :"iso1",
+		 "docentes": "minimo y maximo"
+		}
+	 ]
+	}
   ]
 }

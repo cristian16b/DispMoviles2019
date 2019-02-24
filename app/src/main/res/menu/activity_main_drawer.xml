@@ -18,6 +18,10 @@
             android:id="@+id/comedorUniversitario"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Menú del comedor" />
+        <item
+            android:id="@+id/Bedelia"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Bedelia Movil" />
         <!--item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"

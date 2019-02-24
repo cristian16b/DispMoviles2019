@@ -58,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Menu menu = null;
     private BaseDatos CUdb = null;
     private MenuFragment menuFragment = null;
+    private BedeliaMovil bedeliaMovil = null;
 
 
     /*Funciones*/
@@ -83,7 +84,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         ultimasBusquedas = new ultimasBusquedas();
         ultimasBusquedas.setMainActivity(this);
         menuFragment = new MenuFragment();
-        //trayectoaCU.onMapReady(R.mipmap);
+        bedeliaMovil = new BedeliaMovil();
 
         //Agrego Nodos a mi vector de nodos en oArmaCamino
         cargaNodos();
@@ -205,6 +206,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 menu.clear();
                 //fm.popBackStack();
                 fm.beginTransaction().replace(R.id.fragment_container,menuFragment).addToBackStack(null).commit();
+            }
+        }
+        else if(id == R.id.Bedelia)
+        {
+            if (!(fm.findFragmentById(R.id.fragment_container) instanceof BedeliaMovil)) {
+                qrBoton.hide();
+                menu.clear();
+                //fm.popBackStack();
+                fm.beginTransaction().replace(R.id.fragment_container,bedeliaMovil).addToBackStack(null).commit();
             }
         }
 
