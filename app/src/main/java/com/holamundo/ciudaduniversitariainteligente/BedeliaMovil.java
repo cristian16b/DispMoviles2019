@@ -41,14 +41,11 @@ public class BedeliaMovil extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    private JSONObject listaHorariosFacultades;
     private Spinner spinnerFacultad = null;
 
 
     public BedeliaMovil() {
         // Required empty public constructor
-        //this.spinnerFacultad = (Spinner) spinnerFacultad.findViewById(0);
-        this.listaHorariosFacultades = new JSONObject();
     }
 
     /**
@@ -87,7 +84,8 @@ public class BedeliaMovil extends Fragment {
         spinnerFacultad = (Spinner) view.findViewById(R.id.facultadSpinner);
 
         //cargo los valores de spinner
-        final String[] facultades = {" --- ", "FICH", "FCBC", "FADU", "FHUC"};
+        //convertir a mayusculas
+        final String[] facultades = {" --- ", "fich", "fbcb", "fadu", "fhuc"};
         ArrayAdapter <String>adapter = new ArrayAdapter<String>(getActivity(),R.layout.spinner_layout,facultades);
         spinnerFacultad.setAdapter(adapter);
 
@@ -98,7 +96,7 @@ public class BedeliaMovil extends Fragment {
             {
                 // User selected item
                 //Toast.makeText(getActivity().getApplicationContext(), facultades[position] + " selected!", Toast.LENGTH_SHORT).show();
-                
+                mostrarHorariosCursado(facultades[position]);
             }
 
             @Override
@@ -107,6 +105,12 @@ public class BedeliaMovil extends Fragment {
             }
         });
 
+        // Inflate the layout for this fragment
+        return view;
+    }
+
+    private void mostrarHorariosCursado(final String facultad)
+    {
         //llamo al webservice
         RequestQueue queue = Volley.newRequestQueue(getActivity().getApplicationContext());
 
@@ -124,7 +128,17 @@ public class BedeliaMovil extends Fragment {
                     //accedo al subarray bedelia
                     JSONArray jregular = jso.getJSONArray("bedelia");
                     //accedo al primer elemento (listado de facultades)
-                    listaHorariosFacultades = jregular.getJSONObject(0);
+                    JSONObject listaHorariosFacultades = jregular.getJSONObject(0);
+                    //accedo al listado de la facultad
+                    JSONArray listaClases = listaHorariosFacultades.getJSONArray(facultad);
+
+                    int tamanio = listaClases.length();
+                    for(int i=0;i<tamanio;i++)
+                    {
+                        JSONObject tmp = (JSONObject) listaClases.get(i);
+                        Toast.makeText(getActivity().getApplicationContext(), tmp.getString("materia"), Toast.LENGTH_LONG).show();
+                    }
+
                 }
                 catch (JSONException e)
                 {
@@ -142,12 +156,7 @@ public class BedeliaMovil extends Fragment {
 
         // Add the request to the RequestQueue.
         queue.add(stringRequest);
-
-        // Inflate the layout for this fragment
-        return view;
     }
-
-
 
     // TODO: Rename method, update argument and hook method into UI event
     /*
