@@ -146,19 +146,25 @@ public class BedeliaMovil extends ListFragment {
                         JSONArray listadoClases = listaHorariosFacultades.getJSONArray(facultad);
 
                         int tamanio = listadoClases.length();
+                        String mensaje = "\n";
+                        lista.add(mensaje);
                         for(int i=0;i<tamanio;i++)
                         {
                             JSONObject tmp = (JSONObject) listadoClases.get(i);
-                            //Toast.makeText(getActivity().getApplicationContext(), tmp.getString("materia"), Toast.LENGTH_LONG).show();
-                            lista.add(tmp.getString("materia"));
-                            //Toast.makeText(getActivity().getApplicationContext(), lista.get(i), Toast.LENGTH_LONG).show();
+                            mensaje = " Aula: " +  tmp.getString("aula") + "\n" +
+                                     " Inicio: "+ tmp.getString("inicio") + " - Fin: " + tmp.getString("fin") + "\n" +
+                                     " Materia: " + tmp.getString("materia") + "\n" +
+                                     " Docentes: " + tmp.getString("docentes");
+
+                            lista.add(mensaje);
                         }
+                        //accedo al activity,accedo al layout,accedor a la fila del layout,agrego la lista con los string
                         ArrayAdapter <String>adapter = new ArrayAdapter<String>
-                                (getActivity(),
+                                (getActivity().getApplicationContext(),
                                         R.layout.simple_list_item_1
                                         ,R.id.rowTextView,
                                         lista);
-                        //
+                        //muestro
                         listaClases.setAdapter(adapter);
                     }
                     catch (JSONException e)
