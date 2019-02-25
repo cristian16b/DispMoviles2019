@@ -1,14 +1,17 @@
 package com.holamundo.ciudaduniversitariainteligente;
 
+import android.app.ListActivity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -23,6 +26,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,7 +37,7 @@ import org.json.JSONObject;
  * Use the {@link BedeliaMovil#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class BedeliaMovil extends Fragment {
+public class BedeliaMovil extends ListFragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -42,10 +47,13 @@ public class BedeliaMovil extends Fragment {
     private String mParam1;
     private String mParam2;
     private Spinner spinnerFacultad = null;
+    private ListView listaClases = null;
+    private ArrayList<String> lista;
 
 
     public BedeliaMovil() {
         // Required empty public constructor
+        lista = new ArrayList<String>();
     }
 
     /**
@@ -85,9 +93,11 @@ public class BedeliaMovil extends Fragment {
 
         //cargo los valores de spinner
         //convertir a mayusculas
-        final String[] facultades = {" --- ", "fich", "fbcb", "fadu", "fhuc"};
+        final String[] facultades = {" --- ", "FICH", "FBCB", "FADU", "FHUC", "ISM", "FCM"};
         ArrayAdapter <String>adapter = new ArrayAdapter<String>(getActivity(),R.layout.spinner_layout,facultades);
         spinnerFacultad.setAdapter(adapter);
+
+        listaClases =(ListView) view.findViewById(android.R.id.list);
 
         spinnerFacultad.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() // register the listener
         {
@@ -117,45 +127,55 @@ public class BedeliaMovil extends Fragment {
         //webservice publico fake , ingresar a la url para ver la estructura json de los datos
         String url = "https://my-json-server.typicode.com/cristian16b/DispMoviles2019/db";
 
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-
-                try
-                {
-                    JSONObject jso = new JSONObject(response);
-
-                    //accedo al subarray bedelia
-                    JSONArray jregular = jso.getJSONArray("bedelia");
-                    //accedo al primer elemento (listado de facultades)
-                    JSONObject listaHorariosFacultades = jregular.getJSONObject(0);
-                    //accedo al listado de la facultad
-                    JSONArray listaClases = listaHorariosFacultades.getJSONArray(facultad);
-
-                    int tamanio = listaClases.length();
-                    for(int i=0;i<tamanio;i++)
+        //si selecciono un option del select, averiguo las clases
+        if(!facultad.equals(" --- "))
+        {
+            //Toast.makeText(getActivity().getApplicationContext(), facultad, Toast.LENGTH_LONG).show();
+            StringRequest stringRequest = new StringRequest(Request.Method.GET, url, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try
                     {
-                        JSONObject tmp = (JSONObject) listaClases.get(i);
-                        Toast.makeText(getActivity().getApplicationContext(), tmp.getString("materia"), Toast.LENGTH_LONG).show();
+                        JSONObject jso = new JSONObject(response);
+
+                        //accedo al subarray bedelia
+                        JSONArray jregular = jso.getJSONArray("bedelia");
+                        //accedo al primer elemento (listado de facultades)
+                        JSONObject listaHorariosFacultades = jregular.getJSONObject(0);
+                        //accedo al listado de la facultad
+                        JSONArray listadoClases = listaHorariosFacultades.getJSONArray(facultad);
+
+                        int tamanio = listadoClases.length();
+                        for(int i=0;i<tamanio;i++)
+                        {
+                            JSONObject tmp = (JSONObject) listadoClases.get(i);
+                            //Toast.makeText(getActivity().getApplicationContext(), tmp.getString("materia"), Toast.LENGTH_LONG).show();
+                            lista.add(tmp.getString("materia"));
+                            //Toast.makeText(getActivity().getApplicationContext(), lista.get(i), Toast.LENGTH_LONG).show();
+                        }
+                        ArrayAdapter <String>adapter = new ArrayAdapter<String>
+                                (getActivity(),
+                                        R.layout.simple_list_item_1
+                                        ,R.id.rowTextView,
+                                        lista);
+                        //
+                        listaClases.setAdapter(adapter);
                     }
-
+                    catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                        Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
+                    }
                 }
-                catch (JSONException e)
-                {
-                    e.printStackTrace();
-                    Toast.makeText(getActivity().getApplicationContext(), "ERROR DE CONEXIÓN", Toast.LENGTH_LONG).show();
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
+            });
 
-            }
-        });
-        queue.add(stringRequest);
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
+            // Add the request to the RequestQueue.
+            queue.add(stringRequest);
+        }
     }
 
     // TODO: Rename method, update argument and hook method into UI event
