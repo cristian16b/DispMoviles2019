@@ -147,7 +147,7 @@ public class BedeliaMovil extends ListFragment {
 
                         int tamanio = listadoClases.length();
                         String mensaje = "\n";
-                        lista.add(mensaje);
+                        //lista.add(mensaje);
                         for(int i=0;i<tamanio;i++)
                         {
                             JSONObject tmp = (JSONObject) listadoClases.get(i);
