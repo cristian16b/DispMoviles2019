@@ -4,6 +4,29 @@ App en Android - Ciudad Universitaria Inteligente (UNL)
 Aplicación para Android 4.4 o superior
 SDK 24, Android Studio - Gradle
 
+*Desarrollo base de Lautaro Sick*
+**Tp final de la materia de Dispositivos moviles**
+*objetivo*
+Resolver problemas de la app desarrollada, incorporar nuevas funcionalidades, mantenimiento de code, entre otros. 
+
+Incorporadadas las funcionalidades
+- Resueltos bugs en tiempo de ejecución
+- Incorporados nodos en la base sqLite
+- Incorporado recorrido colectivo (to-do conseguir webservice real)
+- Incorporado menu del comedor (usado un fake server json, https://my-json-server.typicode.com/cristian16b/DispMoviles2019/db)
+- Incorporado horarios de cursado (solo para fich con fake json server, https://my-json-server.typicode.com/cristian16b/DispMoviles2019/db)
+- Cambiada imagen de portada
+- Incoporado mapas del hotel y predio, posibilidad de buscar oficinas y dependencias de los nodos agregados
+
+
+TO-DO:
+- Obtener datos reales de webservice de colectivos, comedor y horarios de cursados
+- Cambiar libreria http a una http asyntask para manejar hilos de ejecución
+- Incrementar el testing y pruebas en diversos dispositivos android
+
+-----------------------
+
+
 Resumen de clases
 
 -----MainActivity-----
