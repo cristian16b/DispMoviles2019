@@ -5,8 +5,11 @@ Aplicación para Android 4.4 o superior
 SDK 24, Android Studio - Gradle
 
 *Desarrollo base de Lautaro Sick*
+
 **Tp final de la materia de Dispositivos moviles**
+
 *objetivo*
+
 Resolver problemas de la app desarrollada, incorporar nuevas funcionalidades, mantenimiento de code, entre otros. 
 
 Incorporadadas las funcionalidades
